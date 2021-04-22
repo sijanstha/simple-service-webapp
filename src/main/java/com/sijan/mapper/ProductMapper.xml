@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace="com.sijan.mapper.ProductMapper">
+
+	<!-- <typeAlias type="com.someapp.model.User" alias="User"/> -->
+
+	<select id="getProductById" parameterType="int"
+		resultType="com.sijan.model.Product">
+		SELECT
+		id, name, price
+		FROM tbl_products
+		WHERE id = #{id}
+	</select>
+
+	<select id='getAllProducts' resultType="list">
+		SELECT * FROM tbl_products
+	</select>
+
+	<insert id='insertProduct' parameterType='Product'
+		useGeneratedKeys='true' keyProperty='id'>
+		INSERT INTO tbl_products(name, price)
+		VALUES(#{name}, #{price})
+	</insert>
+
+	<update id='updateProduct' parameterType='Product'>
+		UPDATE tbl_products
+		SET
+		name= #{name},
+		price = #{price},
+		WHERE id = #{id}
+	</update>
+
+	<delete id='deleteProduct' parameterType='int'>
+		DELETE FROM tbl_products WHERE id = #{id}
+	</delete>
+</mapper>
